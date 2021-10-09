@@ -8,7 +8,7 @@ const closings = {
   '}': '}',
 };
 
-const ex1 = '{}{{}}';
+const ex1 = '{}{{}}}';
 
 function isValidaPattern(pattern) {
   const stack = [];
