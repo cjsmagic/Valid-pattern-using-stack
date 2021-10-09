@@ -1,16 +1,20 @@
-console.log('hello!');
-
 const openings = {
   '{': '{',
+  '[': '[',
+  '(': ')',
 };
 
 const closings = {
-  '}': '}',
+  '}': '{',
+  ']': '[',
+  ')': '(',
 };
 
-const ex1 = '{}{{}}}';
+const ex1 = '[{}{}]';
 
+// need fix for irregular patters liek [)
 function isValidaPattern(pattern) {
+  if (pattern.length === 0) return 'invalid';
   const stack = [];
 
   for (let i = 0; i < pattern.length; i++) {
@@ -19,11 +23,11 @@ function isValidaPattern(pattern) {
     if (openings[char]) {
       // push into stack if opening
       stack.push(char);
-    } else if (openings[preChar]) {
-      // pop from stack if closing
+    } else if (closings[char] === preChar) {
+      // pop from stack if current char is the closing of previous char
       stack.pop();
     } else {
-      stack.push(char); // in case of irregular pattern keep pushing
+      stack.push(char); // in case of new closings keep pushing for length check
     }
     console.log(i, stack);
   }
